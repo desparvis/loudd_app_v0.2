@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LOUDD</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Form container and toggle styles */
+        .form-container {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .form-toggle {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        .toggle-btn {
+            flex: 1;
+            padding: 0.5rem;
+            margin: 0 0.25rem;
+            background-color: #374151; /* Match your dark theme */
+            color: white;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: inherit; /* Inherit from parent (landing-subtitle) */
+            font-size: 1.125rem; /* Match typical subtitle size, adjust if needed */
+            font-weight: 500; /* Medium weight, common for subtitles */
+        }
+        .toggle-btn.active {
+            background-color: #6366f1; /* Highlight active button */
+        }
+        .view-card {
+            display: none; /* Hide by default */
+        }
+        .view-card.active {
+            display: block; /* Show when active */
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <main class="main-content landing-content">
+            <div class="landing-container">
+                <h1>Welcome to LOUDD</h1>
+                <p class="landing-subtitle">Your Music Platform</p>
+                <div class="form-container">
+                    <div class="form-toggle">
+                        <button class="toggle-btn active" data-target="login">Login</button>
+                        <button class="toggle-btn" data-target="register">Register</button>
+                    </div>
+                    <div class="view-card active" id="login-card">
+                        <h2>Login</h2>
+                        <form id="loginForm">
+                            <input type="text" id="username" placeholder="Username" class="input-field" required>
+                            <input type="password" id="password" placeholder="Password" class="input-field" required>
+                            <button type="submit" class="action-card">Login</button>
+                        </form>
+                        <p id="login-message"></p>
+                    </div>
+                    <div class="view-card" id="register-card">
+                        <h2>Register</h2>
+                        <form id="registerForm">
+                            <input type="text" id="regUsername" placeholder="Username" class="input-field" required>
+                            <input type="password" id="regPassword" placeholder="Password" class="input-field" required>
+                            <select id="regRole" class="input-field" required>
+                                <option value="artist">Artist</option>
+                                <option value="admin">Admin</option>
+                                <option value="viewer">Fan</option>
+                            </select>
+                            <button type="submit" class="action-card">Register</button>
+                        </form>
+                        <p id="register-message"></p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
