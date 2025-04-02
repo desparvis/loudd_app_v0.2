@@ -37,5 +37,5 @@ Welcome to **LOUDD**, a music dashboard app built for fans, artists, and admins.
 
 1. **Clone the Repo**:
    ```bash
-   git clone https://github.com/your-username/loudd.git
-   cd loudd
+   https://github.com/desparvis/loudd_app_v0.2.git
+   cd loudd_app_v0.2
