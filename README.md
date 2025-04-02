@@ -39,3 +39,10 @@ Welcome to **LOUDD**, a music dashboard app built for fans, artists, and admins.
    ```bash
    https://github.com/desparvis/loudd_app_v0.2.git
    cd loudd_app_v0.2
+
+## Programmers
+
+1. **Sharif Kiviiri**
+2. **Tracey Browns Prudence**
+3. **El Hadji Faly Seck**
+4. **Credo Desparvis Gutabarwa**
