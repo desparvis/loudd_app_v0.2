@@ -1,6 +1,6 @@
 # LOUDD - Your Music Platform
 
-Welcome to **LOUDD**, a music dashboard app built for fans, artists, and admins. Whether you're here to listen, create, or manage, LOUDD’s got you covered with a sleek, dark-themed interface and dope features.
+Welcome to **LOUDD**, a music dashboard app built for fans, artists, and admins. Whether you're here to listen, create, or manage, LOUDD’s got you covered with a sleek, dark-themed interface and some good features to use.
 
 ## Features
 
@@ -16,13 +16,13 @@ Welcome to **LOUDD**, a music dashboard app built for fans, artists, and admins.
 
 - **Admins**:
   - Monitor platform stats (artists, tracks, pending reviews).
-  - Approve or manage artist-uploaded tracks.
-  - Delete artists and see platform-wide analytics.
+  - Approve or manage tracks that are uploaded by artists.
+  - Delete artists.
 
-- **General**:
+- **General Use**:
   - Login/register access depending on your role(fan, artist, admin).
-  - Profile initals based on your username.
-  - Built with HTML, CSS, JavaScript, ApexCharts, and Lucide icons.
+  - Profile initals are based on your username.
+  - Built with HTML, CSS, JavaScript, ApexCharts, Lucide Icons, and Python Flask.
 
 ## Prerequisites
 
