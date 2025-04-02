@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOUDD - Artist</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        .track-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #374151;
+        }
+        .track-info {
+            flex-grow: 1;
+            margin-right: 1rem;
+        }
+        .action-btn {
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        .action-btn:hover {
+            background-color: #4f46e5;
+        }
+        .delete-btn {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        .delete-btn:hover {
+            background-color: #dc2626;
+        }
+        .text-gray-400 {
+            color: #9ca3af;
+        }
+        .dashboard-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+        .main-content {
+            flex-grow: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            width: 100%;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .stat-card {
+            background-color: #374151;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .stat-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .stat-info p {
+            font-size: 1rem;
+            color: #9ca3af;
+        }
+        .stat-info h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 0;
+        }
+        .stat-icon {
+            width: 2rem;
+            height: 2rem;
+        }
+        .stat-change {
+            font-size: 0.875rem;
+        }
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        .action-card, .content-card {
+            background-color: #374151;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .action-card:hover, .content-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        .action-icon {
+            width: 2rem;
+            height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .action-card h3, .content-card h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .action-card p {
+            color: #9ca3af;
+            font-size: 0.875rem;
+        }
+        .profile-avatar {
+            width: 40px;
+            height: 40px;
+            background-color: #6366f1;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="top-nav">
+            <div class="nav-container">
+                <div class="user-info">
+                    <div class="profile-image">
+                        <div class="profile-avatar" id="profileInitial">?</div>
+                    </div>
+                    <div class="user-details">
+                        <p class="username">Loading...</p>
+                        <p class="user-type">Artist</p>
+                    </div>
+                </div>
+                <div class="view-switcher">
+                    <button id="logoutBtn" class="view-btn">Logout</button>
+                </div>
+            </div>
+        </nav>
+        <main class="main-content">
+            <h1>Welcome, <span class="username">Loading...</span>!</h1>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-info"><p class="stat-title">Total Streams</p><h3 class="stat-value">0</h3></div>
+                        <div class="stat-icon"><i data-lucide="play"></i></div>
+                    </div>
+                    <div class="stat-change positive">+0% from last month</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <div class="stat-info"><p class="stat-title">Total Songs</p><h3 class="stat-value">0</h3></div>
+                        <div class="stat-icon"><i data-lucide="music"></i></div>
+                    </div>
+                    <div class="stat-change positive">+0% from last month</div>
+                </div>
+            </div>
+            <div class="chart-card">
+                <h2>Performance Analytics</h2>
+                <div id="performanceChart"></div>
+            </div>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-icon"><i data-lucide="upload"></i></div>
+                    <h3>Upload New Track</h3>
+                    <form id="uploadSongForm" enctype="multipart/form-data">
+                        <input type="text" id="trackTitle" placeholder="Track Title" class="input-field" required>
+                        <input type="file" id="songFile" accept="audio/*" class="input-field" required>
+                        <button type="submit" class="action-btn">Upload</button>
+                    </form>
+                    <p id="upload-message"></p>
+                </div>
+                <a href="#contracts" class="action-card">
+                    <div class="action-icon"><i data-lucide="file-text"></i></div>
+                    <h3>Review Contracts</h3>
+                    <p>View and sign pending agreements</p>
+                </a>
+            </div>
+            <div class="content-grid">
+                <div class="content-card">
+                    <h2>Active Contracts</h2>
+                    <div id="contractsList"></div>
+                </div>
+                <div class="content-card">
+                    <h2>Manage Music</h2>
+                    <div id="manageMusic"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>LOUDD - Fan</title>
+        <link rel="stylesheet" href="styles.css">
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://unpkg.com/lucide@0.381.0/dist/umd/lucide.min.js"></script>
+        <style>
+            .track-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0.75rem 0;
+                border-bottom: 1px solid #374151;
+            }
+
+            .track-info {
+                flex-grow: 1;
+                margin-right: 1rem;
+            }
+
+            .play-btn,
+            .action-btn {
+                background-color: #6366f1;
+                color: white;
+                border: none;
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.25rem;
+                cursor: pointer;
+                transition: background-color 0.3s;
+                font-family: inherit;
+                font-size: 0.875rem;
+                font-weight: 500;
+            }
+
+            .play-btn:hover,
+            .action-btn:hover {
+                background-color: #4f46e5;
+            }
+
+            .audio-player {
+                width: 100%;
+                margin-top: 0.5rem;
+                outline: none;
+                display: none;
+            }
+
+            .audio-player::-webkit-media-controls-panel {
+                background-color: #374151;
+                color: #9ca3af;
+            }
+
+            .content-card,
+            .stat-card {
+                position: relative;
+                min-height: 100px;
+                background-color: #374151;
+                border-radius: 0.5rem;
+                padding: 1.5rem;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .stat-card:hover {
+                transform: scale(1.03);
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            }
+
+            .loading-text {
+                color: #9ca3af;
+                text-align: center;
+                padding: 1rem;
+            }
+
+            .dashboard-container {
+                display: flex;
+                flex-direction: column;
+                min-height: 100vh;
+                background-color: #1f2937;
+                color: #f3f4f6;
+            }
+
+            .main-content {
+                flex-grow: 1;
+                padding: 2rem;
+                overflow-y: auto;
+                width: 100%;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .stat-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 0.5rem;
+            }
+
+            .stat-info p {
+                font-size: 1rem;
+                color: #9ca3af;
+            }
+
+            .stat-info h3 {
+                font-size: 2rem;
+                font-weight: 700;
+                margin: 0;
+            }
+
+            .stat-icon i {
+                width: 2rem;
+                height: 2rem;
+                stroke: #6366f1;
+                stroke-width: 2.5;
+            }
+
+            .stat-change {
+                font-size: 0.875rem;
+            }
+
+            .content-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .actions-grid {
+                display: flex;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
+            }
+
+            .action-card {
+                background-color: #374151;
+                border-radius: 0.5rem;
+                padding: 1rem;
+                max-width: 400px;
+                width: 100%;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .action-card:hover {
+                transform: scale(1.03);
+                box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+            }
+
+            .action-icon i {
+                width: 2rem;
+                height: 2rem;
+                stroke: #6366f1;
+                stroke-width: 2.5;
+                margin-bottom: 0.5rem;
+            }
+
+            .action-card h3 {
+                font-size: 1.25rem;
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+
+            .action-card select {
+                width: 100%;
+                padding: 0.5rem;
+                margin-bottom: 0.5rem;
+                background-color: #4b5563;
+                color: #f3f4f6;
+                border: none;
+                border-radius: 0.25rem;
+                font-family: inherit;
+            }
+
+            .favorite-tracks-list {
+                margin-top: 0.5rem;
+                max-height: 150px;
+                overflow-y: auto;
+            }
+
+            .profile-avatar {
+                width: 40px;
+                height: 40px;
+                background-color: #6366f1;
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.5rem;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="dashboard-container">
+            <nav class="top-nav">
+                <div class="nav-container">
+                    <div class="user-info">
+                        <div class="profile-image">
+                            <div class="profile-avatar" id="profileInitial">?</div>
+                        </div>
+                        <div class="user-details">
+                            <p class="username">Loading...</p>
+                            <p class="user-type">Fan</p>
+                        </div>
+                    </div>
+                    <div class="view-switcher">
+                        <button id="logoutBtn" class="view-btn">Logout</button>
+                    </div>
+                </div>
+            </nav>
+            <main class="main-content">
+                <h1>Welcome, <span class="username">Loading...</span>!</h1>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-info">
+                                <p class="stat-title">Listened to Songs</p>
+                                <h3 class="stat-value">0</h3>
+                            </div>
+                            <div class="stat-icon"><i data-lucide="music"></i></div>
+                        </div>
+                        <div class="stat-change positive">+0 this week</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-info">
+                                <p class="stat-title">Favorite Tracks</p>
+                                <h3 class="stat-value">0</h3>
+                            </div>
+                            <div class="stat-icon"><i data-lucide="heart"></i></div>
+                        </div>
+                        <div class="favorite-tracks-list" id="favoriteTracksList">
+                            <p class="text-gray-400">No favorite tracks yet.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <h2>Listening History</h2>
+                    <div id="listeningChart"></div>
+                </div>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <h2>Recently Played</h2>
+                        <div id="recentlyPlayed">
+                            <p class="loading-text">Loading recent plays...</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <h2>Recommended</h2>
+                        <div id="recommended">
+                            <p class="loading-text">Loading recommendations...</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="actions-grid">
+                    <div class="action-card">
+                        <div class="action-icon"><i data-lucide="heart"></i></div>
+                        <h3>Add Favorite</h3>
+                        <form id="addFavoriteForm">
+                            <select id="favoriteTrackId" class="input-field" required>
+                                <option value="">Select a track</option>
+                            </select>
+                            <button type="submit" class="action-btn">Add</button>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="script.js"></script>
+    </body>
+
+    </html>
